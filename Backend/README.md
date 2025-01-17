@@ -104,3 +104,44 @@ This endpoint is used to log out the currently authenticated user by invalidatin
 ### Request Headers
 
 - `Authorization` (string, required): The JSON Web Token (JWT) obtained during the login process.
+
+## `/captains/register` Endpoint
+
+### Description
+
+Registers a new captain by creating a captain account in the database with the provided information.
+
+### HTTP Method
+
+`POST`
+
+### Request Body
+
+The request body must be a JSON object with the following properties:
+
+- `fullName` (object):
+    -`firstname` (string, required): Captain's first name (minimum 3 characters)
+    - `lastname` (string, optional): Captain's last name
+- `email` (string, required): Captain's email address (must be a valid email)
+- `password` (string, required): Captain's password (minimum 6 characters)
+- `vehicle` (object):
+  - `color` (string, required): Vehicle color (minimum 3 characters)
+  - `plateNumber` (string, required): Vehicle plate number (minimum 3 characters)
+  - `capacity` (number, required): Vehicle passenger capacity (minimum 1)
+  - `vehicleType` (string, required): Type of vehicle (must be 'car', 'motorcycle', or 'auto rickshaw')
+
+`
+### Example Response
+
+- `captain` (object):
+    - `fullName` (object):
+        - `firstName` (string): The first name of the captain.
+        - `lastName` (string): The last name of the captain.
+    - `email` (string): The email address of the captain.
+    - `password` (string): The hashed password of the captain.
+    - `vehicle` (object):
+        - `color` (string): The color of the vehicle.
+        - `plateNumber` (string): The plate number of the vehicle.
+        - `capacity` (number): The passenger capacity of the vehicle.
+        - `vehicleType` (string): The type of vehicle.
+- `token` (string): The JSON Web Token (JWT) that must be included in the `Authorization` header of all subsequent requests to authenticate the captain.
