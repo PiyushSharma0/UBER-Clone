@@ -1,5 +1,7 @@
 # Backend API Documentation
 
+## User Endpoints
+
 ## `/users/register` Endpoint
 
 ### Description
@@ -105,6 +107,8 @@ This endpoint is used to log out the currently authenticated user by invalidatin
 
 - `Authorization` (string, required): The JSON Web Token (JWT) obtained during the login process.
 
+## Captain Endpoints
+
 ## `/captains/register` Endpoint
 
 ### Description
@@ -145,3 +149,92 @@ The request body must be a JSON object with the following properties:
         - `capacity` (number): The passenger capacity of the vehicle.
         - `vehicleType` (string): The type of vehicle.
 - `token` (string): The JSON Web Token (JWT) that must be included in the `Authorization` header of all subsequent requests to authenticate the captain.
+
+## `/captains/login` Endpoint
+
+### Description
+
+This endpoint is used to log in an existing captain. It validates the input data and checks the credentials against the database.
+
+### HTTP Method
+
+`POST`
+
+### Endpoint
+
+`/captains/login`
+
+### Request Body
+
+The request body should be a JSON object with the following fields:
+
+- `email`: A string representing the captain's email. It must be a valid email address.
+- `password`: A string with a minimum length of 6 characters.
+
+### Example Response
+
+- `captain` (object):
+    - `fullName` (object):
+        - `firstName` (string): The first name of the captain.
+        - `lastName` (string): The last name of the captain.
+    - `email` (string): The email address of the captain.
+    - `password` (string): The hashed password of the captain.
+    - `vehicle` (object):
+        - `color` (string): The color of the vehicle.
+        - `plateNumber` (string): The plate number of the vehicle.
+        - `capacity` (number): The passenger capacity of the vehicle.
+        - `vehicleType` (string): The type of vehicle.
+    - `status` (string): The status of the captain.
+- `token` (string): The JSON Web Token (JWT) that must be included in the `Authorization` header of all subsequent requests to authenticate the captain.
+
+## `/captains/profile` Endpoint
+
+### Description
+
+This endpoint is used to retrieve the profile information of the currently authenticated captain.
+
+### HTTP Method
+
+`GET`
+
+### Endpoint
+
+`/captains/profile`
+
+### Request Headers
+
+- `Authorization` (string, required): The JSON Web Token (JWT) obtained during the login process.
+`Authonrization bearer <token>`
+
+### Example Response
+
+- `captain` (object):
+    - `fullName` (object):
+        - `firstName` (string): The first name of the captain.
+        - `lastName` (string): The last name of the captain.
+    - `email` (string): The email address of the captain.
+    - `vehicle` (object):
+        - `color` (string): The color of the vehicle.
+        - `plateNumber` (string): The plate number of the vehicle.
+        - `capacity` (number): The passenger capacity of the vehicle.
+        - `vehicleType` (string): The type of vehicle.
+    - `status` (string): The status of the captain.
+    
+
+## `/captains/logout` Endpoint
+
+### Description
+
+This endpoint is used to log out the currently authenticated captain by invalidating the JSON Web Token (JWT).
+
+### HTTP Method
+
+`GET`
+
+### Endpoint
+
+`/captains/logout`
+
+### Request Headers
+
+- `Authorization` (string, required): The JSON Web Token (JWT) obtained during the login process.
